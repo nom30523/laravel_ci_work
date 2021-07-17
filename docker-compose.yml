@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  nginx:
+    build:
+      context: ./.docker/nginx
+      dockerfile: Dockerfile
+    container_name: laravel_nginx
+    working_dir: /app
+    ports:
+        - "80:80"
+    volumes:
+        - ./laravel:/app
+    depends_on:
+      - app
+      - mysql
+    
+  app:
+    build:
+      context: ./.docker/app
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    volumes:
+      - ./laravel:/app
+    expose:
+      - 9000
+    ports:
+        - "9000:9000"
+    depends_on:
+      - mysql
+    tty: true
+    
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    container_name: laravel_mysql
+    volumes:
+      - db-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: laravel
+    ports:
+      - 3306:3306
+    
+volumes:
+  db-volume:
