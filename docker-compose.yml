@@ -14,7 +14,7 @@ services:
     depends_on:
       - app
       - mysql
-    
+
   app:
     build:
       context: ./.docker/app
@@ -29,11 +29,12 @@ services:
     depends_on:
       - mysql
     tty: true
-    
+
   mysql:
     platform: linux/x86_64
     image: mysql:5.7
     container_name: laravel_mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - db-volume:/var/lib/mysql
     environment:
@@ -41,6 +42,6 @@ services:
       MYSQL_DATABASE: laravel
     ports:
       - 3306:3306
-    
+
 volumes:
   db-volume:
