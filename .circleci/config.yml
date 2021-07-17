@@ -13,7 +13,7 @@ jobs:
       - save_cache:
           key: v1-composer-{{ checksum "composer.json" }}
           paths:
-            - ./vendor
+            - vendor
       - restore_cache:
           key: node-v1-{{ checksum "package.json" }}
       - run:
@@ -22,7 +22,7 @@ jobs:
       - save_cache:
           key: node-v1-{{ checksum "package.json" }}
           paths:
-            - ./node_modules
+            - node_modules
       - persist_to_workspace:
           root: .
           paths:
