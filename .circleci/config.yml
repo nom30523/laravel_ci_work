@@ -5,7 +5,7 @@ jobs:
       - image: circleci/php:7.4.21-node
     steps:
       - checkout:
-        - path: ~/laravel_ci_work
+          path: ~/laravel_ci_work
       - restore_cache:
           key: v1-composer-{{ checksum "composer.json" }}
       - run:
