@@ -23,6 +23,9 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+      - run:
+          name: check ls
+          command: ls -a
       - persist_to_workspace:
           root: .
           paths:
