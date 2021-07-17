@@ -10,7 +10,7 @@ services:
     ports:
         - "80:80"
     volumes:
-        - ./laravel:/app
+        - .:/app
     depends_on:
       - app
       - mysql
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: laravel_app
     volumes:
-      - ./laravel:/app
+      - .:/app
     expose:
       - 9000
     ports:
